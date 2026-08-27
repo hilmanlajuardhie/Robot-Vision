@@ -21,7 +21,12 @@ def deteksi():
 
     dummy_input = np.zeros((480, 640, 3), dtype=np.uint8)
     for _ in range(3):
-        model.predict(source=dummy_input, device=device, verbose=False, quantize=32)
+        model.predict(
+            source=dummy_input, 
+            device=device, 
+            verbose=False, 
+            quantize=32
+            )
 
     frame_count = 0
     fps_display = 0.0
@@ -45,9 +50,15 @@ def deteksi():
 
             fps_text = f"FPS:{fps_display:.2f}"
             cv.putText(frame, fps_text, (10, 20), cv.FONT_HERSHEY_COMPLEX_SMALL, 1, (235,150,0), 2, cv.LINE_AA)
-            print(f"FPS: {fps_display}")
+            print(f"FPS: {fps_display:.2f}")
 
-            results = model.predict(source=frame, device=device, verbose=False, quantize=8)
+            results = model.predict(
+                source=frame, 
+                device=device, 
+                verbose=False, 
+                quantize=8
+                )
+
             annotated_frame = results[0].plot()
 
             cv.imshow("YOLO11 Detection Grid", annotated_frame)
