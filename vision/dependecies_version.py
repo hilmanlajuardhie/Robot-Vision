@@ -16,7 +16,7 @@ if torch.cuda.is_available():
 
 model = YOLO("vision/yolo11n.pt")
 result = model.predict(
-    source="vision/asset/vid/ZL1.mp4",
+    source="vision/asset/img/bus.jpg",
     device=0 if torch.cuda.is_available() else "cpu",
     save = True,
     name="Result"
