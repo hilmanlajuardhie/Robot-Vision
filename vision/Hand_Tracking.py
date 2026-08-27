@@ -42,7 +42,9 @@ def track_hands():
             results = model.predict(
                 source=frame, 
                 device=device, 
-                verbose=False
+                verbose=False,
+                save=True,
+                name="hand"
                 )        
             
             annotated_frame = frame.copy()
