@@ -1,4 +1,4 @@
 git add .;
 git status;
-git commit -m "Some Changes!";
+git commit -m "Full Version!";
 git push -u origin main --force
