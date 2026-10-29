@@ -63,6 +63,14 @@ python3 src/ArUco.py
 
 Detects `DICT_6X6_250` ArUco markers, estimates pose with `solvePnP`, draws coordinate axes, and displays estimated Z distance. The camera matrix is an example 640×480 calibration; accurate measurements require calibration for the actual camera.
 
+```bash
+python3 src/ROI_Detect.py
+```
+
+Runs YOLOv11 pose tracking with ByteTrack and monitors five predefined rectangular work-station regions. The program tracks each detected person's left and right wrist, reports when a wrist enters or leaves a station, measures the time spent there, and displays the timers and recent event logs on screen. Press `q` to quit.
+
+The station definitions are in the `STATIONS` dictionary near the top of `src/ROI_Detect.py`. Their coordinates currently assume a 640×480 camera image. Adjust these polygons if the camera resolution or physical station layout changes. The script uses `model/yolo11m-pose.pt` and webcam `0`.
+
 `src/OpenCV_Basic.py` contains commented image and webcam exercises using `asset/img/`; `src/OpenCV_Advance.py` is currently a placeholder.
 
 ## Diagnostics
@@ -75,6 +83,6 @@ This checks Python packages, OpenCV GTK/GStreamer support, system GStreamer, PyT
 
 ## Output and current limitations
 
-Generated results are stored in `runs/`. There are currently no ROS 2 nodes, launch files, `package.xml`, or `setup.py`. Camera index, resolution, model choice, and ArUco calibration are configured in source code. A future ROS 2 version could publish detections, pose keypoints, and marker transforms as ROS topics.
+Generated results are stored in `runs/`. The ROI tracker currently displays its results live and logs station events to the terminal and on-screen panel. There are currently no ROS 2 nodes, launch files, `package.xml`, or `setup.py`. Camera index, resolution, model choice, ROI polygons, and ArUco calibration are configured in source code. A future ROS 2 version could publish detections, pose keypoints, station events, and marker transforms as ROS topics.
 
 See [LICENSE](LICENSE) for licensing information.
