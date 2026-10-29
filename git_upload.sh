@@ -1,4 +1,4 @@
 git add .;
 git status;
 git commit -m "...";
-git push origin master
+git push -u origin main
