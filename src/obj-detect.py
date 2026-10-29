@@ -13,7 +13,7 @@ def deteksi():
     print(f"Running YOLO11 on device: {device}")
     model = YOLO(str(MODEL_PATH))
 
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(0, cv.CAP_V4L2)
     if not cap.isOpened():
         print("Error: Could not open camera.")
         return
