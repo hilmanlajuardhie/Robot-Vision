@@ -2,9 +2,13 @@ import cv2 as cv
 import time
 import numpy as np
 import random
+from pathlib import Path
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+ASSET_DIR = WORKSPACE_ROOT / "asset" / "img"
 
 # ========== Imaging ==========
-# img = cv.imread('asset/4.jpg', 1)
+# img = cv.imread(str(ASSET_DIR / '4.jpg'), 1)
 # for i in range (200):
 #     for j in range (img.shape[1]):
 #         img[i][j] = [random.randint(0,255),random.randint(0,255),random.randint(0,255)]

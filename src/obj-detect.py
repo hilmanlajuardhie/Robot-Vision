@@ -3,11 +3,15 @@ import torch
 import numpy as np
 from ultralytics import YOLO
 import time
+from pathlib import Path
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+MODEL_PATH = WORKSPACE_ROOT / "model" / "yolo11m.pt"
 
 def deteksi():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Running YOLO11 on device: {device}")
-    model = YOLO("vision/yolo11m.pt")
+    model = YOLO(str(MODEL_PATH))
 
     cap = cv.VideoCapture(0)
     if not cap.isOpened():

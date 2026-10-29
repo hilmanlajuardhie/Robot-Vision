@@ -1,6 +1,10 @@
 import cv2 as cv
 import numpy as np
 import time
+from pathlib import Path
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+ASSET_DIR = WORKSPACE_ROOT / "asset" / "img"
 
 # ========== Generating ArUco Marker ==========
 # def gen_aruco_marker():
@@ -17,7 +21,7 @@ import time
 #         value=[255, 255, 255]
 #     )
 
-#     file_name = f"asset/aruco_mark_id_{mark_id}.png"
+#     file_name = ASSET_DIR / f"aruco_mark_id_{mark_id}.png"
 #     cv.imwrite(file_name, mark_image_border)
 
 #     print(f"Marker Generated and Saved as {file_name}")

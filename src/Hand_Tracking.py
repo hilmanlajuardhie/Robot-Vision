@@ -3,12 +3,17 @@ import torch
 import numpy as np
 from ultralytics import YOLO
 import time
+from pathlib import Path
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+MODEL_PATH = WORKSPACE_ROOT / "model" / "yolo11m-pose.pt"
+OUTPUT_DIR = WORKSPACE_ROOT / "runs" / "pose" / "hand"
 
 def track_hands():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Running YOLO11 on device: {device}")
     
-    model = YOLO("vision/yolo11m-pose.pt")
+    model = YOLO(str(MODEL_PATH))
 
     cap = cv.VideoCapture(0)
     if not cap.isOpened():
@@ -44,7 +49,9 @@ def track_hands():
                 device=device, 
                 verbose=False,
                 save=True,
-                name="hand"
+                project=str(OUTPUT_DIR.parent),
+                name=OUTPUT_DIR.name,
+                exist_ok=True,
                 )        
             
             annotated_frame = frame.copy()
