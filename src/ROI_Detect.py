@@ -1,8 +1,12 @@
-import os
 import time
+from pathlib import Path
+
 import cv2 as cv
 import numpy as np
 from ultralytics import YOLO
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+MODEL_PATH = WORKSPACE_ROOT / "model" / "yolo11m-pose.pt"
 
 # 1. Station Polygon Coordinates
 STATIONS = {
@@ -50,8 +54,7 @@ def draw_log_panel(frame):
 
 def track_wrist_stations():
     
-    model_path = os.path.join("model", "yolo11m-pose.pt")
-    model = YOLO(model_path)
+    model = YOLO(str(MODEL_PATH))
     cap = cv.VideoCapture(0, cv.CAP_V4L2)
 
     while cap.isOpened():
