@@ -43,6 +43,9 @@ def track_hands():
             ret, frame = cap.read()
             if not ret:
                 break
+
+            # Mirror the camera view before inference so annotations remain readable.
+            frame = cv.flip(frame, 1)
             
             results = model.predict(
                 source=frame, 
@@ -62,8 +65,8 @@ def track_hands():
                 
                 for person in keypoints:
                     if len(person) >= 11:
-                        left_wrist = person[9]
-                        right_wrist = person[10]
+                        left_wrist = person[10]
+                        right_wrist = person[9]
 
                         if left_wrist[2] > 0.5:
                             lx, ly = int(left_wrist[0]), int(left_wrist[1])
@@ -90,7 +93,6 @@ def track_hands():
             fps_text = f"FPS: {fps_display:.2f}"
             cv.putText(annotated_frame, fps_text, (10, 30), cv.FONT_HERSHEY_COMPLEX_SMALL, 1, (235,150,0), 2, cv.LINE_AA)
 
-            annotated_frame = cv.flip(annotated_frame, 1)
             cv.imshow("YOLO11 Hand Tracking", annotated_frame)
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
