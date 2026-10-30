@@ -86,7 +86,7 @@ def track_wrist_stations():
             track_ids = results[0].boxes.id.cpu().numpy().astype(int)
 
             for kpts, confs, track_id in zip(keypoints_xy, keypoints_conf, track_ids):
-                wrists = [("Left_Wrist", 9), ("Right_Wrist", 10)]
+                wrists = [("Left_Wrist", 10), ("Right_Wrist", 9)]
 
                 for wrist_label, kp_idx in wrists:
                     conf = confs[kp_idx] if confs is not None else 1.0
