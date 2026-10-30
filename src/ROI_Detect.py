@@ -10,11 +10,11 @@ MODEL_PATH = WORKSPACE_ROOT / "model" / "yolo11m-pose.pt"
 
 # 1. Station Polygon Coordinates
 STATIONS = {
-    "Station_1": np.array([[10, 25], [110, 25], [110, 125], [10, 125]], np.int32),
-    "Station_2": np.array([[10, 150], [110, 150], [110, 250], [10, 250]], np.int32),
-    "Station_3": np.array([[270, 75], [370, 75], [370, 175], [270, 175]], np.int32),
-    "Station_4": np.array([[490, 25], [630, 25], [630, 125], [490, 125]], np.int32),
-    "Station_5": np.array([[490, 150], [630, 150], [630, 250], [490, 250]], np.int32),
+    "Station_1": np.array([[10, 25], [160, 25], [160, 125], [10, 125]], np.int32),
+    "Station_2": np.array([[10, 250], [160, 250], [160, 350], [10, 350]], np.int32),
+    "Station_3": np.array([[245, 25], [395, 25], [395, 125], [245, 125]], np.int32),
+    "Station_4": np.array([[480, 25], [630, 25], [630, 125], [480, 125]], np.int32),
+    "Station_5": np.array([[480, 250], [630, 250], [630, 350], [480, 350]], np.int32),
 }
 
 # Tracking & On-Screen Display Memory
@@ -69,15 +69,29 @@ def track_wrist_stations():
 
         # 1. Draw Station Polygons with Last Work Time
         for st_name, polygon in STATIONS.items():
-            cv.polylines(frame, [polygon], isClosed=True, color=(255, 200, 0), thickness=2)
+            cv.polylines(frame, [polygon], isClosed=True, color=(0, 0, 153), thickness=2)
             
             # Display station name + last completed duration
-            label = st_name
-            if st_name in station_last_time:
-                label += f" (Last: {station_last_time[st_name]:.2f}s)"
+            # label = st_name
+            # if st_name in station_last_time:
+            #     label += f" (Last: {station_last_time[st_name]:.2f}s)"
                 
-            cv.putText(frame, label, (polygon[0][0], polygon[0][1] - 5),
-                       cv.FONT_HERSHEY_SIMPLEX, 0.45, (255, 200, 0), 1)
+            # cv.putText(frame, label, (polygon[0][0], polygon[0][1] - 5),
+            #            cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 153), 2)
+
+            # Station Tittle (Above the Box)
+            x = polygon[0][0]
+            top_y = polygon[:, 1].min()
+            bot_y = polygon[:, 1].max()
+            cv.putText(frame, st_name, (x,top_y - 5),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0 ,153), 1)
+            
+            # Last Time (Below the Box)
+            if st_name in station_last_time:
+                cv.putText(frame, f"Last: {station_last_time[st_name]:.2f}s",
+                           (x, bot_y + 18), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0 ,153), 1)
+
+            
 
         # 2. Extract Keypoints & State Tracking
         if results[0].keypoints is not None and results[0].boxes.id is not None:
