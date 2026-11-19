@@ -8,7 +8,7 @@ Experimental computer-vision software for robotics, using Python, OpenCV, and Ul
 Robot-Vision/
 ├── asset/img/       Input images and ArUco markers
 ├── model/            YOLOv11 model weights
-├── src/              Vision scripts
+├── src/              Vision scripts and unified launcher
 ├── runs/             Generated prediction images
 ├── Sys_Check.py      Dependency and hardware diagnostics
 ├── routine.sh        Optional Ubuntu/Python maintenance script
@@ -72,6 +72,20 @@ Runs YOLOv11 pose tracking with ByteTrack and monitors five predefined rectangul
 The station definitions are in the `STATIONS` dictionary near the top of `src/ROI_Detect.py`. Their coordinates currently assume a 640×480 camera image. Adjust these polygons if the camera resolution or physical station layout changes. The script uses `model/yolo11m-pose.pt` and webcam `0`.
 
 `src/OpenCV_Basic.py` contains commented image and webcam exercises using `asset/img/`; `src/OpenCV_Advance.py` is currently a placeholder.
+
+All source programs can also be launched through the unified entry point:
+
+```bash
+python3 src/Sum.py --list
+python3 src/Sum.py object
+python3 src/Sum.py hand
+python3 src/Sum.py roi
+python3 src/Sum.py aruco
+python3 src/Sum.py image
+python3 src/Sum.py video
+```
+
+`src/Sum.py` reuses the functions from the individual source files, so the original scripts remain available and the combined launcher does not duplicate their implementation. See [`src/README.md`](src/README.md) for a detailed description of every source file and function.
 
 ## Diagnostics
 
