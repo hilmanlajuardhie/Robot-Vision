@@ -71,14 +71,6 @@ def track_wrist_stations():
         for st_name, polygon in STATIONS.items():
             cv.polylines(frame, [polygon], isClosed=True, color=(0, 0, 153), thickness=2)
             
-            # Display station name + last completed duration
-            # label = st_name
-            # if st_name in station_last_time:
-            #     label += f" (Last: {station_last_time[st_name]:.2f}s)"
-                
-            # cv.putText(frame, label, (polygon[0][0], polygon[0][1] - 5),
-            #            cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 153), 2)
-
             # Station Tittle (Above the Box)
             x = polygon[0][0]
             top_y = polygon[:, 1].min()
@@ -90,8 +82,6 @@ def track_wrist_stations():
             if st_name in station_last_time:
                 cv.putText(frame, f"Last: {station_last_time[st_name]:.2f}s",
                            (x, bot_y + 18), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0 ,153), 1)
-
-            
 
         # 2. Extract Keypoints & State Tracking
         if results[0].keypoints is not None and results[0].boxes.id is not None:
