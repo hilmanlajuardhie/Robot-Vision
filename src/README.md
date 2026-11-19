@@ -39,19 +39,13 @@ Reserved for future advanced OpenCV experiments. It currently contains no execut
 
 ### `Sum.py`
 
-`Sum.py` is the unified launcher. It reuses the functions from the other source files and provides one command-line entry point:
+`Sum.py` is a standalone combined source file. It contains the implementations of the object detector, hand tracker, ROI tracker, ArUco estimator, OpenCV image/video exercises, and an advanced OpenCV placeholder. It provides an interactive menu:
 
 ```bash
-python3 src/Sum.py --list
-python3 src/Sum.py object
-python3 src/Sum.py hand
-python3 src/Sum.py roi
-python3 src/Sum.py aruco
-python3 src/Sum.py image
-python3 src/Sum.py video
+python3 src/Sum.py
 ```
 
-The original files remain independently runnable. `Sum.py` does not run programs automatically when imported.
+Select a numbered function from the menu. Live functions return to the menu when `q` is pressed in their OpenCV window. The original files remain independently runnable.
 
 ## Shared conventions
 

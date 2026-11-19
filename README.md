@@ -73,19 +73,13 @@ The station definitions are in the `STATIONS` dictionary near the top of `src/RO
 
 `src/OpenCV_Basic.py` contains commented image and webcam exercises using `asset/img/`; `src/OpenCV_Advance.py` is currently a placeholder.
 
-All source programs can also be launched through the unified entry point:
+All source functions are also available in the standalone combined file through an interactive menu:
 
 ```bash
-python3 src/Sum.py --list
-python3 src/Sum.py object
-python3 src/Sum.py hand
-python3 src/Sum.py roi
-python3 src/Sum.py aruco
-python3 src/Sum.py image
-python3 src/Sum.py video
+python3 src/Sum.py
 ```
 
-`src/Sum.py` reuses the functions from the individual source files, so the original scripts remain available and the combined launcher does not duplicate their implementation. See [`src/README.md`](src/README.md) for a detailed description of every source file and function.
+`src/Sum.py` contains the combined implementations and lets you select object detection, hand tracking, ROI tracking, ArUco pose estimation, image processing, video processing, or the advanced OpenCV placeholder. The original scripts remain available. See [`src/README.md`](src/README.md) for details.
 
 ## Diagnostics
 
